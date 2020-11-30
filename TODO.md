@@ -1,11 +1,10 @@
 # TO DO list
 
-[] Input mode / Command line parsing in main
-[] ATM Controller class
-[] Bank Server class
-[] UI Class
+[x] Input mode / Command line parsing in main
+[x] ATM Controller class
+[x] Bank Server class
+[X] UI Class
 	[] Singleton implementation
-[] ATM machine class
 [] Account class
 [] Savings acc class
 [] Checkings acc class
