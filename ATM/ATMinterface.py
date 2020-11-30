@@ -31,11 +31,12 @@ class ATMinterface:
         return (acc_id, pin)
     
     def select_mode(self): 
-        type = input("Choose account type (1. savings/ 2. checkings):")
+        type = input("Choose account type (1.checkings / 2. savings):")
         print("Modes:")
         print("1) Check balance")
         print("2) Deposit")
         print("3) Withdraw")
+        print("4) Exit")
         mode = input("Choose one of the options:")
         return mode
     
