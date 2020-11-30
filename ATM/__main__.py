@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import ATMcontroller
 import ATMserver
@@ -6,9 +5,9 @@ import ATMinterface
 
 def main():
     
-#     server = ATMserver
+    server = ATMserver.ATMserver()
     interface = ATMinterface.ATMinterface()
-    controller = ATMcontroller.ATMcontroller(interface)
+    controller = ATMcontroller.ATMcontroller(interface, server)
 
 #     (twenty_notes, fifty_notes) = controller.parse_input_arg()
 

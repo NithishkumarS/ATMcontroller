@@ -8,21 +8,29 @@ class ATMcontroller:
         self.interface.welcome_message()
         (acc_id, pin)= self.interface.input_user_credentials()
         
-        if self.verify(acc_id, pin):
-            self.mode = self.interface.select_mode()
-            if int(self.mode) ==1 :
-                self.interface.current_balance(1000)
-                self.operation["total"] =1000
-            if int(self.mode) ==2:
-                self.amount = input("Enter amount:")
-                print("here")
-            if int(self.mode) ==3:
-                self.amount = input("Enter amount:")
-                print("here1")
-            self.operation["status"] = True
-            self.operation["mode"] = self.mode
-            self.operation["total"] = self.amount
-            self.interface.transaction_result(self.operation) 
+        if self.server.verify_pin(acc_id, pin):
+            while True:
+                self.mode = int(self.interface.select_mode())
+                if self.mode == 4:
+                    break
+                if self.mode ==1 :
+                    amount = self.server.return_balance(acc_id, pin)
+                    self.interface.current_balance(amount)
+                    self.operation["total"] = amount
+                if self.mode ==2:
+                    amount = int(input("Enter amount:"))
+                    if self.isValid(amount):
+                        print("in")
+                        self.server.update_balance(acc_id, pin, amount, self.mode)
+                if self.mode ==3:
+                    amount = int(input("Enter amount:"))
+                    if self.isValid(amount):
+                        print("in")
+                        self.server.update_balance(acc_id, pin, amount, self.mode)
+                self.operation["status"] = True
+                self.operation["mode"] = self.mode
+                self.operation["total"] = self.server.return_balance(acc_id, pin)
+                self.interface.transaction_result(self.operation) 
             
         else:
             self.operation["status"] = False
@@ -33,9 +41,6 @@ class ATMcontroller:
             print("Enter a positive value")
         elif amount > 10000:
             print("Transaction limit < 10000")
-        else 
+        else:
             return True
         return False
-        
-    def verify(self, acc_id, pin):
-        return True
